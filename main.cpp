@@ -4,7 +4,7 @@
 #include <windows.h>
 
     int number = 0, inp = 1, low, high, tries = 0;
-
+    using namespace std;
      int main(){
          std::ofstream logger;
          logger.open("guessing.log");
@@ -13,16 +13,15 @@
          std::cin >> low >> high;
          system("cls");
          logger << "User entered : " << low << " and " << high << std::endl;
-         while(inp != number){
          //revert the numbers if the user entered the higher value than the second number
          if(low > high){
              int temp = high; 
              high = low;
              low = temp;
-               logger << "The program revert the number to : " << low << " and " << high << std::endl << "\n";
+               logger << "The program reverted the number to : " << low << " and " << high << std::endl << "\n";
                number = rand() % low + high;
                logger << "Program generated : " << number << std::endl << "\n\n";
-               std::cout << "Now guess the number from " << high << " to " << low << " : ";
+               std::cout << "Now guess the number from " << low << " to " << high << " : ";
                std::cin >> inp;
                tries++;
                logger << "Player entered : " << inp << std::endl;
@@ -32,11 +31,13 @@
          else{
                number = rand() % high + low;
                logger << "Program generated : " << number << std::endl << "\n\n";
-               std::cout << "Now guess the number from " << low << " to " << high << " : ";
-               std::cin >> inp;
-               tries++;
-               logger << "Player entered : " << inp << std::endl;
          }
+
+         while(inp != number){
+        std::cout << "Now guess the number from " << low << " to " << high << " : ";
+        std::cin >> inp;
+        logger << "Player entered : " << inp << std::endl;
+        tries++;
 
          if(inp == number){
              system("cls");
